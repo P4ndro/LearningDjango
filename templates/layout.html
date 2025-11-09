@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="{% url 'home' %}">Home 🏠</a>
+            <a href="{% url 'post_list' %}">Posts 📝</a>
+            <a href="{% url 'about' %}">About ℹ️</a>
+        </nav>
+        
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+        <footer>
+            <p>Django Basics Project © 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
