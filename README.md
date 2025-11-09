@@ -139,7 +139,5 @@ This project is open source and available for educational purposes.
 - Django community
 - Various online tutorials and resources
 
----
 
-Made with ❤️ while learning Django
 
