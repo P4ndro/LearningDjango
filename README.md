@@ -141,30 +141,12 @@ myproject/
 - [ ] Comments system
 - [ ] Categories and tags
 - [ ] Search functionality
-- [ ] Pagination for posts
-- [ ] Create a contact form
-- [ ] Deploy to a hosting platform (Heroku, PythonAnywhere, etc.)
-- [ ] Add rich text editor for post content
-- [ ] Email verification for registration
 
-## 🤝 Contributing
 
-This is a learning project, but suggestions and improvements are welcome! Feel free to fork the repository and submit pull requests.
 
-## 📄 License
 
-This project is open source and available for educational purposes.
 
-## 👤 Author
 
-**P4ndro**
-- GitHub: [@P4ndro](https://github.com/P4ndro)
-
-## 🙏 Acknowledgments
-
-- Django documentation
-- Django community
-- Various online tutorials and resources
 
 
 
