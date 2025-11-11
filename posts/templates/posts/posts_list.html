@@ -2,14 +2,25 @@
 {% block title %}Posts{% endblock %}
 {% block content %}
 <section>
-<h1>📝 Posts List</h1>
+    <h1>📝 Posts List</h1>
     <p>Welcome to the posts page! Here you can view all the posts from our Django project.</p>
+    
+    {% if posts %}
         {% for post in posts %}
         <article>
-            <h2>{{ post.title }}</h2>
+            <h2>
+                <a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a>
+            </h2>
             <p>{{ post.body }}</p>
-            <p>{{ post.date }}</p>
+            <div class="post-meta">
+                <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
+            </div>
         </article>
         {% endfor %}
+    {% else %}
+        <div class="no-posts">
+            <p>No posts yet. Start creating some content!</p>
+        </div>
+    {% endif %}
 </section>
 {% endblock %}

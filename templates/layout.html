@@ -10,19 +10,13 @@
 <body>
     <div class="container">
         <nav>
-            <a href="{% url 'home' %}">Home 🏠</a>
-            <a href="{% url 'post_list' %}">Posts 📝</a>
-            <a href="{% url 'about' %}">About ℹ️</a>
+            <a href="{% url 'home' %}">Home <span role="img" aria-label="Home">🏠</span></a>
+            <a href="{% url 'posts:posts' %}">Posts <span role="img" aria-label="Posts">📝</span></a>
+            <a href="{% url 'about' %}">About <span role="img" aria-label="About">ℹ️</span></a>
         </nav>
         
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
-        
-        <footer>
-            <p>Django Basics Project © 2025</p>
-        </footer>
+        {% block content %}
+        {% endblock %}
     </div>
 </body>
 </html>

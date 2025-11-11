@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<section>
+    <article>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.body }}</p>
+        <div class="post-meta">
+            <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
+        </div>
+    </article>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="{% url 'posts:posts' %}" style="display: inline-block;">← Back to All Posts</a>
+    </div>
+</section>
+{% endblock %}

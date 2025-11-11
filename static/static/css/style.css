@@ -22,7 +22,7 @@ body {
     padding: 50px;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
+    max-width: 900px;
     width: 100%;
     text-align: center;
     animation: fadeIn 0.6s ease-in;
@@ -118,4 +118,110 @@ footer {
     border-top: 1px solid #eee;
     color: #999;
     font-size: 0.9rem;
+}
+
+/* Posts Section */
+section {
+    width: 100%;
+    max-width: 900px;
+}
+
+section h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+section > p {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #888;
+    font-size: 1rem;
+}
+
+/* Individual Post Cards */
+article {
+    background: #f9f9f9;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: left;
+    border-left: 4px solid #667eea;
+}
+
+article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+article h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+article h2 a {
+    color: #667eea;
+    text-decoration: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    transition: color 0.3s ease;
+}
+
+article h2 a:hover {
+    color: #764ba2;
+    background: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+article p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+article p:last-child {
+    font-size: 0.9rem;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+/* Empty state */
+.no-posts {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.no-posts p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Post metadata */
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.post-date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-date::before {
+    content: "📅";
 }
