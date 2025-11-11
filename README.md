@@ -6,10 +6,23 @@ A simple Django web application built to learn the fundamentals of Django web de
 
 - **Home Page**: Welcome page with modern design
 - **About Page**: Project information
-- **Posts App**: Basic posts functionality (ready for expansion)
+- **Posts App**: Full CRUD functionality for blog posts
+  - Create, Read, Update posts
+  - Image upload support
+  - Slug-based URLs
+- **User Authentication**: Complete registration and login system
+  - Custom registration form with email and name fields
+  - Login/Logout functionality
+  - Protected routes (login required)
+  - User-specific features
+- **Custom Forms**: ModelForms with validation
+  - Custom User Registration Form
+  - Post Creation/Edit Forms
 - **Template Inheritance**: Using Django's template system with a base layout
 - **Static Files**: Custom CSS and JavaScript
 - **Modern UI**: Beautiful gradient design with responsive layout
+- **Dynamic Navigation**: Changes based on authentication status
+- **Flash Messages**: Success/error messages with animations
 
 ## 📋 Prerequisites
 
@@ -104,21 +117,35 @@ myproject/
 ## 📝 What I Learned
 
 - Setting up a Django project from scratch
-- Creating Django apps
+- Creating Django apps (posts, register)
 - Using Django's template system and template inheritance
-- Serving static files (CSS, JavaScript)
-- URL routing and views
+- Serving static files (CSS, JavaScript) and media files
+- URL routing, views, and URL namespacing
+- Django Models and database migrations
+- User authentication system
+- Creating custom forms (ModelForms, UserCreationForm)
+- Form validation and error handling
+- Login required decorators
+- Flash messages with Django messages framework
+- File uploads (image banners)
 - Project structure best practices
 - Git version control
 
 ## 🔮 Future Enhancements
 
-- [ ] Add database models for posts
-- [ ] Implement CRUD operations for posts
-- [ ] Add user authentication
+- [x] Add database models for posts
+- [x] Implement CRUD operations for posts
+- [x] Add user authentication
+- [ ] Delete functionality for posts
+- [ ] User profiles and post ownership
+- [ ] Comments system
+- [ ] Categories and tags
+- [ ] Search functionality
+- [ ] Pagination for posts
 - [ ] Create a contact form
-- [ ] Deploy to a hosting platform
-- [ ] Add more styling and animations
+- [ ] Deploy to a hosting platform (Heroku, PythonAnywhere, etc.)
+- [ ] Add rich text editor for post content
+- [ ] Email verification for registration
 
 ## 🤝 Contributing
 

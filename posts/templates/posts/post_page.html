@@ -3,12 +3,19 @@
 {% block content %}
 <section>
     <article>
-        <img src="{{ post.banner.url }}" alt="{{ post.title }}" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;"    >
+        {% if post.banner %}
+            <img src="{{ post.banner.url }}" alt="{{ post.title }}" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
+        {% endif %}
         <h1>{{ post.title }}</h1>
-        <p>{{ post.body }}</p>
+        <p style="white-space: pre-line;">{{ post.body }}</p>
         <div class="post-meta">
             <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
         </div>
+        {% if user.is_authenticated %}
+            <div style="margin-top: 20px;">
+                <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit Post</a>
+            </div>
+        {% endif %}
     </article>
     
     <div style="text-align: center; margin-top: 40px;">

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 from django.contrib import messages
+from .forms import CustomUserCreationForm
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
@@ -14,7 +15,7 @@ def register(request):
             login(request, user)  # Automatically log in the user
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     
     return render(request, 'register/register.html', {'form': form})
 
@@ -32,3 +33,8 @@ def login_user(request):
     else:
         form = AuthenticationForm()
     return render(request, 'register/login.html', {'form': form})
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, 'You have been logged out successfully!')
+    return redirect('home')

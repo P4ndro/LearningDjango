@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Project{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3">
 </head>
 <body>
     <div class="container">
@@ -13,8 +13,14 @@
             <a href="{% url 'home' %}">Home <span role="img" aria-label="Home">🏠</span></a>
             <a href="{% url 'posts:posts' %}">Posts <span role="img" aria-label="Posts">📝</span></a>
             <a href="{% url 'about' %}">About <span role="img" aria-label="About">ℹ️</span></a>
-            <a href="{% url 'register:register' %}">Register <span role="img" aria-label="Register">👤</span></a>
-            <a href="{% url 'register:login' %}">Login <span role="img" aria-label="Login">🔒</span></a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'register:logout' %}">Logout <span role="img" aria-label="Logout">🚪</span></a>
+                <span class="user-welcome">Welcome, {{ user.username }}!</span>
+            {% else %}
+                <a href="{% url 'register:register' %}">Register <span role="img" aria-label="Register">👤</span></a>
+                <a href="{% url 'register:login' %}">Login <span role="img" aria-label="Login">🔒</span></a>
+            {% endif %}
         </nav>
         
         <main>

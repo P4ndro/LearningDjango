@@ -78,11 +78,23 @@ a:hover {
 /* Navigation */
 nav {
     margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 nav a {
     margin: 0 10px;
     padding: 10px 25px;
+    font-size: 0.95rem;
+}
+
+.user-welcome {
+    color: #667eea;
+    font-weight: 600;
+    padding: 10px 15px;
+    margin-left: 10px;
     font-size: 0.95rem;
 }
 
@@ -440,4 +452,94 @@ article p:last-child {
     background-color: #d1ecf1;
     border: 2px solid #17a2b8;
     color: #0c5460;
+}
+
+/* Textarea Styling */
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    resize: vertical;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background-color: white;
+}
+
+/* File Input Styling */
+.form-group input[type="file"] {
+    padding: 8px;
+    background-color: white;
+}
+
+/* Cancel Button */
+.btn-cancel {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+}
+
+/* Create Post Button */
+.btn-create-post {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.btn-create-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Edit Button for Posts */
+.btn-edit {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.btn-edit:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
 }
