@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section>
+    <h1>🔒 Login</h1>
+    <p>Welcome back! Please login to your account</p>
+    
+    <form method="post" class="register-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" class="required">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                {{ form.username.errors }}
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" class="required">Password</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                {{ form.password.errors }}
+            {% endif %}
+        </div>
+        
+        {% if form.non_field_errors %}
+            <div class="error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        
+        <button type="submit" class="btn-register">Login</button>
+    </form>
+    
+    <div class="login-link">
+        <p>Don't have an account? <a href="{% url 'register:register' %}">Register here</a></p>
+    </div>
+</section>
+{% endblock %}
