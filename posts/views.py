@@ -38,3 +38,14 @@ def edit_post(request, slug):
     else:
         form = PostForm(instance=post)
     return render(request, 'posts/edit_post.html', {'form': form, 'post': post})
+
+@login_required(login_url='register:login')
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.method == 'POST':
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+        return redirect('posts:posts')
+    return redirect('posts:page', slug=slug)
+
+

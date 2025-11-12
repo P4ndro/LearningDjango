@@ -12,8 +12,12 @@
             <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
         </div>
         {% if user.is_authenticated %}
-            <div style="margin-top: 20px;">
+            <div class="post-actions">
                 <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit Post</a>
+                <form method="post" action="{% url 'posts:delete' slug=post.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">🗑️ Delete Post</button>
+                </form>
             </div>
         {% endif %}
     </article>

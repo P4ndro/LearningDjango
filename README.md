@@ -7,9 +7,10 @@ A simple Django web application built to learn the fundamentals of Django web de
 - **Home Page**: Welcome page with modern design
 - **About Page**: Project information
 - **Posts App**: Full CRUD functionality for blog posts
-  - Create, Read, Update posts
+  - Create, Read, Update, Delete posts
   - Image upload support
   - Slug-based URLs
+  - Delete confirmation dialog
 - **User Authentication**: Complete registration and login system
   - Custom registration form with email and name fields
   - Login/Logout functionality
@@ -136,7 +137,7 @@ myproject/
 - [x] Add database models for posts
 - [x] Implement CRUD operations for posts
 - [x] Add user authentication
-- [ ] Delete functionality for posts
+- [x] Delete functionality for posts
 - [ ] User profiles and post ownership
 - [ ] Comments system
 - [ ] Categories and tags
