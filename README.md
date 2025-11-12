@@ -129,8 +129,7 @@ myproject/
 - Login required decorators
 - Flash messages with Django messages framework
 - File uploads (image banners)
-- Project structure best practices
-- Git version control
+
 
 ## 🔮 Future Enhancements
 
