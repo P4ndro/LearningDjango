@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<section>
+    <h1>✏️ Edit Profile</h1>
+    
+    <form method="post" enctype="multipart/form-data" style="max-width: 800px; margin: 0 auto;">
+        {% csrf_token %}
+        
+        <div class="form-section">
+            <h2>Account Information</h2>
+            
+            {% if user_form.non_field_errors %}
+                <div class="alert alert-error">
+                    {{ user_form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            {% for field in user_form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <div class="field-errors">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-section" style="margin-top: 30px;">
+            <h2>Profile Information</h2>
+            
+            {% if profile_form.non_field_errors %}
+                <div class="alert alert-error">
+                    {{ profile_form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            {% if request.user.profile.profile_picture %}
+                <div style="margin-bottom: 20px;">
+                    <p>Current profile picture:</p>
+                    <img src="{{ request.user.profile.profile_picture.url }}" alt="Current profile picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                </div>
+            {% endif %}
+            
+            {% for field in profile_form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <div class="field-errors">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <button type="submit" class="btn-edit" style="padding: 12px 30px; font-size: 1.1em;">💾 Save Changes</button>
+            <a href="{% url 'register:profile' username=request.user.username %}" style="margin-left: 15px;">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
+

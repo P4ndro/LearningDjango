@@ -14,19 +14,27 @@
     {% if posts %}
         {% for post in posts %}
         <article>
+            {% if post.banner %}
+                <a href="{% url 'posts:page' slug=post.slug %}">
+                    <img src="{{ post.banner.url }}" alt="{{ post.title }}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                </a>
+            {% endif %}
             <h2>
                 <a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a>
             </h2>
             <p>{{ post.body|truncatewords:50 }}</p>
             <div class="post-meta">
                 <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
+                <span class="post-author">
+                    By <a href="{% url 'register:profile' username=post.author.username %}" style="color: #667eea; text-decoration: none; font-weight: 600;">{{ post.author.username }}</a>
+                </span>
             </div>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and post.author == user %}
                 <div class="post-actions">
                     <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit</a>
-                    <form method="post" action="{% url 'posts:delete' slug=post.slug %}">
+                    <form method="post" action="{% url 'posts:delete' slug=post.slug %}" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn-delete">🗑️ Delete</button>
+                        <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this post?');">🗑️ Delete</button>
                     </form>
                 </div>
             {% endif %}

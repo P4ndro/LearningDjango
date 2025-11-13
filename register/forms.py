@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -20,4 +21,48 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'profile_picture', 'location', 'website', 'twitter', 'github']
+        widgets = {
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Tell us about yourself...'
+            }),
+            'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'City, Country'
+            }),
+            'website': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'https://yourwebsite.com'
+            }),
+            'twitter': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'twitter_handle'
+            }),
+            'github': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'github_username'
+            }),
+        }
 

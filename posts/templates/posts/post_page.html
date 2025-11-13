@@ -6,17 +6,45 @@
         {% if post.banner %}
             <img src="{{ post.banner.url }}" alt="{{ post.title }}" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
         {% endif %}
+        
         <h1>{{ post.title }}</h1>
-        <p style="white-space: pre-line;">{{ post.body }}</p>
-        <div class="post-meta">
+        
+        <div class="post-meta" style="margin-bottom: 30px;">
             <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
+            <span class="post-author">
+                By <a href="{% url 'register:profile' username=post.author.username %}" style="color: #667eea; text-decoration: none; font-weight: 600;">
+                    {{ post.author.username }}
+                </a>
+            </span>
         </div>
-        {% if user.is_authenticated %}
+        
+        <div class="author-card" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px;">
+            <div>
+                {% if post.author.profile.profile_picture %}
+                    <img src="{{ post.author.profile.profile_picture.url }}" alt="{{ post.author.username }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                {% else %}
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                        {{ post.author.username|first|upper }}
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <strong>{{ post.author.username }}</strong>
+                {% if post.author.profile.bio %}
+                    <p style="margin: 5px 0 0 0; color: #666;">{{ post.author.profile.bio|truncatewords:20 }}</p>
+                {% endif %}
+                <a href="{% url 'register:profile' username=post.author.username %}" style="font-size: 0.9em;">View Profile →</a>
+            </div>
+        </div>
+        
+        <p style="white-space: pre-line;">{{ post.body }}</p>
+        
+        {% if user.is_authenticated and post.author == user %}
             <div class="post-actions">
                 <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit Post</a>
-                <form method="post" action="{% url 'posts:delete' slug=post.slug %}">
+                <form method="post" action="{% url 'posts:delete' slug=post.slug %}" style="display: inline;">
                     {% csrf_token %}
-                    <button type="submit" class="btn-delete">🗑️ Delete Post</button>
+                    <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this post?');">🗑️ Delete Post</button>
                 </form>
             </div>
         {% endif %}

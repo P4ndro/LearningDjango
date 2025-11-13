@@ -11,19 +11,31 @@ A simple Django web application built to learn the fundamentals of Django web de
   - Image upload support
   - Slug-based URLs
   - Delete confirmation dialog
+  - Post ownership and author tracking
+  - Only post owners can edit/delete their posts
 - **User Authentication**: Complete registration and login system
   - Custom registration form with email and name fields
   - Login/Logout functionality
   - Protected routes (login required)
   - User-specific features
+- **User Profiles**: Comprehensive profile system
+  - Public profile pages for all users
+  - Profile picture upload
+  - Bio, location, and social media links
+  - View all posts by a specific user
+  - Edit own profile
+  - Automatic profile creation on registration
+  - "My Posts" page to manage your content
 - **Custom Forms**: ModelForms with validation
   - Custom User Registration Form
   - Post Creation/Edit Forms
+  - Profile Update Forms
 - **Template Inheritance**: Using Django's template system with a base layout
 - **Static Files**: Custom CSS and JavaScript
 - **Modern UI**: Beautiful gradient design with responsive layout
 - **Dynamic Navigation**: Changes based on authentication status
 - **Flash Messages**: Success/error messages with animations
+- **Permissions & Security**: Ownership verification for edit/delete operations
 
 ## 📋 Prerequisites
 
@@ -71,10 +83,19 @@ Before running this project, make sure you have:
    python manage.py runserver
    ```
 
-7. **Open your browser** and visit:
+7. **Create a superuser** (if you haven't already):
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+8. **Open your browser** and visit:
    - Homepage: `http://127.0.0.1:8000/`
    - About: `http://127.0.0.1:8000/about/`
    - Posts: `http://127.0.0.1:8000/posts/`
+   - Register: `http://127.0.0.1:8000/register/`
+   - Login: `http://127.0.0.1:8000/register/login/`
+   - Profile: `http://127.0.0.1:8000/register/profile/<username>/`
+   - My Posts: `http://127.0.0.1:8000/register/my-posts/`
    - Admin: `http://127.0.0.1:8000/admin/`
 
 ## 📁 Project Structure
@@ -128,7 +149,13 @@ myproject/
 - Form validation and error handling
 - Login required decorators
 - Flash messages with Django messages framework
-- File uploads (image banners)
+- File uploads (image banners and profile pictures)
+- ForeignKey relationships (Post to User)
+- OneToOneField relationships (User to Profile)
+- Django signals for automatic model creation
+- Ownership verification and permissions
+- Context processors and template context
+- Profile management and user data handling
 
 
 ## 🔮 Future Enhancements
@@ -137,7 +164,7 @@ myproject/
 - [x] Implement CRUD operations for posts
 - [x] Add user authentication
 - [x] Delete functionality for posts
-- [ ] User profiles and post ownership
+- [x] User profiles and post ownership
 - [ ] Comments system
 - [ ] Categories and tags
 - [ ] Search functionality
