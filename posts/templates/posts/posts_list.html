@@ -1,48 +1,78 @@
 {% extends 'layout.html' %}
-{% block title %}Posts{% endblock %}
+{% block title %}Feed{% endblock %}
 {% block content %}
-<section>
-    <h1>📝 Posts List</h1>
-    <p>Welcome to the posts page! Here you can view all the posts from our Django project.</p>
-    
-    {% if user.is_authenticated %}
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="{% url 'posts:create' %}" class="btn-create-post">✍️ Create New Post</a>
-        </div>
-    {% endif %}
+<section class="feed-container">
+    <div class="feed-header">
+        <h1>📱 Feed</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'posts:create' %}" class="btn-create">
+                <span class="plus-icon">+</span> Create Post
+            </a>
+        {% endif %}
+    </div>
     
     {% if posts %}
-        {% for post in posts %}
-        <article>
-            {% if post.banner %}
-                <a href="{% url 'posts:page' slug=post.slug %}">
-                    <img src="{{ post.banner.url }}" alt="{{ post.title }}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
-                </a>
-            {% endif %}
-            <h2>
-                <a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a>
-            </h2>
-            <p>{{ post.body|truncatewords:50 }}</p>
-            <div class="post-meta">
-                <span class="post-date">{{ post.date|date:"F d, Y" }}</span>
-                <span class="post-author">
-                    By <a href="{% url 'register:profile' username=post.author.username %}" style="color: #667eea; text-decoration: none; font-weight: 600;">{{ post.author.username }}</a>
-                </span>
-            </div>
-            {% if user.is_authenticated and post.author == user %}
-                <div class="post-actions">
-                    <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit</a>
-                    <form method="post" action="{% url 'posts:delete' slug=post.slug %}" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this post?');">🗑️ Delete</button>
-                    </form>
+        <div class="posts-feed">
+            {% for post in posts %}
+            <article class="feed-card">
+                <div class="card-header">
+                    <div class="author-info">
+                        <div class="author-avatar-placeholder">
+                            {{ post.author.username|first|upper }}
+                        </div>
+                        <div class="author-meta">
+                            <a href="{% url 'register:profile' username=post.author.username %}" class="author-name">
+                                {{ post.author.username }}
+                            </a>
+                            <span class="post-time">{{ post.date|timesince }} ago</span>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated and post.author == user %}
+                        <div class="post-options">
+                            <a href="{% url 'posts:edit' slug=post.slug %}" class="option-btn" title="Edit">✏️</a>
+                            <form method="post" action="{% url 'posts:delete' slug=post.slug %}">
+                                {% csrf_token %}
+                                <button type="submit" class="option-btn delete-btn" onclick="return confirm('Delete this post?');" title="Delete">🗑️</button>
+                            </form>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-        </article>
-        {% endfor %}
+                
+                <a href="{% url 'posts:page' slug=post.slug %}" class="card-content-link">
+                    {% if post.banner %}
+                        <div class="card-image">
+                            <img src="{{ post.banner.url }}" alt="{{ post.title }}">
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        <p class="post-excerpt">{{ post.body|truncatewords:30 }}</p>
+                    </div>
+                </a>
+                
+                <div class="card-footer">
+                    <div class="action-buttons">
+                        <a href="{% url 'posts:page' slug=post.slug %}" class="action-btn">
+                            <span class="action-icon">📖</span>
+                            <span class="action-label">Read</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
     {% else %}
-        <div class="no-posts">
-            <p>No posts yet. {% if user.is_authenticated %}<a href="{% url 'posts:create' %}">Create the first one!</a>{% else %}Login to create some content!{% endif %}</p>
+        <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <h3>No posts yet</h3>
+            <p>
+                {% if user.is_authenticated %}
+                    Be the first to share something! <a href="{% url 'posts:create' %}">Create a post</a>
+                {% else %}
+                    <a href="{% url 'register:login' %}">Login</a> to start sharing
+                {% endif %}
+            </p>
         </div>
     {% endif %}
 </section>
