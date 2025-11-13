@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment, Like
 
 
 class PostForm(forms.ModelForm):
@@ -29,3 +29,32 @@ class PostForm(forms.ModelForm):
             'banner': 'Optional: Upload a banner image for your post'
         }
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
+        widgets = {
+            'body': forms.Textarea(attrs={
+                'class': 'form-control comment-textarea',
+                'placeholder': 'Write your comment here...',
+                'rows': 3,
+                'maxlength': 500
+            }),
+        }
+        labels = {
+            'body': ''
+        }
+
+class LikeForm(forms.ModelForm):
+    class Meta:
+        model = Like
+        fields = ['is_liked']
+        widgets = {
+            'is_liked': forms.CheckboxInput(attrs={
+                'class': 'form-check-input'
+            }),
+        }
+        help_texts = {
+            'is_liked': 'Like the post'
+        }
+    

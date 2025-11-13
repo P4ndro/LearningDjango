@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Comment{% endblock %}
+{% block content %}
+<section>
+    <h1>✏️ Edit Comment</h1>
+    <p>Editing comment on "<a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a>"</p>
+    
+    <form method="post" class="comment-edit-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.body.id_for_label }}">Comment</label>
+            {{ form.body }}
+            {% if form.body.errors %}
+                <div class="field-errors">
+                    {{ form.body.errors }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn-edit">💾 Save Changes</button>
+            <a href="{% url 'posts:page' slug=post.slug %}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
+

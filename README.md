@@ -26,6 +26,19 @@ A simple Django web application built to learn the fundamentals of Django web de
   - Edit own profile
   - Automatic profile creation on registration
   - "My Posts" page to manage your content
+- **Comments System**: Full-featured commenting
+  - Add, edit, delete comments
+  - Profile pictures in comments
+  - Time ago display (e.g., "5 minutes ago")
+  - Author badge for post owners
+  - Edit indicator on modified comments
+  - Post owners can moderate (delete any comment)
+  - Beautiful card-based UI
+- **Likes System**: Post engagement
+  - Like/unlike posts with heart icon
+  - Like counter
+  - Visual feedback on interaction
+  - Requires authentication
 - **Custom Forms**: ModelForms with validation
   - Custom User Registration Form
   - Post Creation/Edit Forms
@@ -165,9 +178,11 @@ myproject/
 - [x] Add user authentication
 - [x] Delete functionality for posts
 - [x] User profiles and post ownership
-- [ ] Comments system
+- [x] Comments system
+- [x] Like/unlike functionality
 - [ ] Categories and tags
 - [ ] Search functionality
+- [ ] Nested comment replies
 
 
 

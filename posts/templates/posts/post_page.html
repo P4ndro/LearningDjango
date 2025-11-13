@@ -39,6 +39,24 @@
         
         <p style="white-space: pre-line;">{{ post.body }}</p>
         
+        <div class="post-engagement">
+            <div class="like-section">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'posts:like' slug=post.slug %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-like {% if user_has_liked %}liked{% endif %}">
+                            {% if user_has_liked %}❤️{% else %}🤍{% endif %} {{ like_count }}
+                        </button>
+                    </form>
+                {% else %}
+                    <span class="like-display">❤️ {{ like_count }}</span>
+                {% endif %}
+            </div>
+            <div class="comment-count">
+                💬 {{ comment_count }} comment{{ comment_count|pluralize }}
+            </div>
+        </div>
+        
         {% if user.is_authenticated and post.author == user %}
             <div class="post-actions">
                 <a href="{% url 'posts:edit' slug=post.slug %}" class="btn-edit">✏️ Edit Post</a>
@@ -49,6 +67,79 @@
             </div>
         {% endif %}
     </article>
+    
+    <div class="comments-section">
+        <h2>💬 Comments ({{ comment_count }})</h2>
+        
+        {% if user.is_authenticated %}
+            <div class="comment-form-container">
+                <h3>Leave a Comment</h3>
+                <form method="post" class="comment-form">
+                    {% csrf_token %}
+                    {{ form.body }}
+                    <button type="submit" class="btn-comment">Post Comment</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="login-prompt">
+                <p>Please <a href="{% url 'register:login' %}">login</a> to leave a comment.</p>
+            </div>
+        {% endif %}
+        
+        {% if comments %}
+            <div class="comments-list">
+                {% for comment in comments %}
+                    <div class="comment" id="comment-{{ comment.id }}">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                {% if comment.author.profile.profile_picture %}
+                                    <img src="{{ comment.author.profile.profile_picture.url }}" alt="{{ comment.author.username }}" class="comment-avatar">
+                                {% else %}
+                                    <div class="comment-avatar-placeholder">
+                                        {{ comment.author.username|first|upper }}
+                                    </div>
+                                {% endif %}
+                                <div class="comment-meta">
+                                    <a href="{% url 'register:profile' username=comment.author.username %}" class="comment-author-name">
+                                        {{ comment.author.username }}
+                                        {% if comment.author == post.author %}
+                                            <span class="author-badge">Author</span>
+                                        {% endif %}
+                                    </a>
+                                    <span class="comment-date">{{ comment.created_at|timesince }} ago</span>
+                                    {% if comment.created_at != comment.updated_at %}
+                                        <span class="edited-badge">(edited)</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comment-body">
+                            <p>{{ comment.body }}</p>
+                        </div>
+                        
+                        {% if user.is_authenticated %}
+                            {% if comment.author == user or post.author == user %}
+                                <div class="comment-actions">
+                                    {% if comment.author == user %}
+                                        <a href="{% url 'posts:edit_comment' id=comment.id %}" class="btn-edit-comment">✏️ Edit</a>
+                                    {% endif %}
+                                    <form method="post" action="{% url 'posts:delete_comment' id=comment.id %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-delete-comment" onclick="return confirm('Delete this comment?');">🗑️ Delete</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-comments">
+                <p>No comments yet. Be the first to comment!</p>
+            </div>
+        {% endif %}
+    </div>
     
     <div style="text-align: center; margin-top: 40px;">
         <a href="{% url 'posts:posts' %}" style="display: inline-block;">← Back to All Posts</a>

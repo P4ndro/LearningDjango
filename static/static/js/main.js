@@ -1,5 +1,4 @@
 console.log("Django Project JS Loaded");
-
 // Custom Delete Confirmation Modal
 document.addEventListener('DOMContentLoaded', function() {
     // Get or create modal
